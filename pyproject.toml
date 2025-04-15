@@ -1,9 +1,14 @@
 [project]
+<<<<<<< HEAD
 name = "crypto-predictor-system"
+=======
+name = "trades"
+>>>>>>> 749c14b (Initial commit)
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
+<<<<<<< HEAD
 dependencies = [
     "jsonschema-specifications>=2024.10.1",
     "loguru>=0.7.3",
@@ -19,3 +24,10 @@ members = [
 
 [tool.uv.sources]
 trades = { workspace = true }
+=======
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+>>>>>>> 749c14b (Initial commit)
