@@ -204,11 +204,15 @@ name = "crypto-predictor-system"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "jsonschema-specifications" },
     { name = "quixstreams" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "quixstreams", specifier = ">=3.13.1" }]
+requires-dist = [
+    { name = "jsonschema-specifications", specifier = ">=2024.10.1" },
+    { name = "quixstreams", specifier = ">=3.13.1" },
+]
 
 [[package]]
 name = "cryptography"
