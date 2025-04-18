@@ -216,6 +216,7 @@ dependencies = [
     { name = "jsonschema-specifications" },
     { name = "loguru" },
     { name = "quixstreams" },
+    { name = "trades" },
     { name = "websocket-client" },
 ]
 
@@ -224,6 +225,7 @@ requires-dist = [
     { name = "jsonschema-specifications", specifier = ">=2024.10.1" },
     { name = "loguru", specifier = ">=0.7.3" },
     { name = "quixstreams", specifier = ">=3.13.1" },
+    { name = "trades", editable = "services/trades" },
     { name = "websocket-client", specifier = ">=1.8.0" },
 ]
 

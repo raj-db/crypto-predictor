@@ -10,6 +10,9 @@ ENV UV_COMPILE_BYTECODE=1
 # Copy from the cache instead of linking since it's a mounted volume
 ENV UV_LINK_MODE=copy
 
+#copy services to app
+COPY services /app/services
+
 # Install the project's dependencies using the lockfile and settings
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
@@ -18,9 +21,9 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 # Then, add the rest of the project source code and install it
 # Installing separately from its dependencies allows optimal layer caching
-# ADD . /app
-# RUN --mount=type=cache,target=/root/.cache/uv \
-#     uv sync --frozen --no-dev
+ADD . /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-dev
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
@@ -34,3 +37,6 @@ ENTRYPOINT []
 # CMD ["fastapi", "dev", "--host", "0.0.0.0", "src/uv_docker_example"]
 
 CMD ["uv", "run", "services/trades/src/trades/main.py"]
+
+# debugging
+#CMD ["/bin/bash" , "-c" , "sleep infinity"]

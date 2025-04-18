@@ -8,6 +8,7 @@ dependencies = [
     "jsonschema-specifications>=2024.10.1",
     "loguru>=0.7.3",
     "quixstreams>=3.13.1",
+    "trades",
     "websocket-client>=1.8.0",
 ]
 
@@ -15,3 +16,6 @@ dependencies = [
 members = [
     "services/trades",
 ]
+
+[tool.uv.sources]
+trades = { workspace = true }
