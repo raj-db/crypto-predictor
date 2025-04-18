@@ -3,6 +3,7 @@ from quixstreams import Application
 from kraken_api import krakenAPI, Trade
 from loguru import logger
 
+
 def run(
     kafka_broker_address: str,
     kafka_topic_name: str,
@@ -50,11 +51,17 @@ def run(
 
 if __name__ == "__main__":
 
-# create object that can talk to kraken API and get trade data in real time
-    api=krakenAPI(product_ids=["BTC/EUR"])
+    
+    from trades.config import config
+    # create object that can talk to kraken API and get trade data in real time
+    api=krakenAPI(product_ids=config.product_ids)
 
     run(
-        kafka_broker_address='localhost:31234',
-        kafka_topic_name='trades',
+            # from local system to kafka running in kubernetes cluster
+        # kafka_broker_address='localhost:31234',
+
+        # from kubernetes cluster to kafka running in kubernetes cluster 
+        kafka_broker_address=config.kafka_broker_address,
+        kafka_topic_name=config.kafka_topic_name,
         kraken_api=api
     )
