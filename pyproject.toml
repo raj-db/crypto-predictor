@@ -24,10 +24,22 @@ members = [
 
 [tool.uv.sources]
 trades = { workspace = true }
-=======
-dependencies = []
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
->>>>>>> 749c14b (Initial commit)
+[tool.ruff]
+line-length=100
+lint.select=[
+    "C", #mccabe rules
+    "E", # pycodestyle (error)
+    "F", # pyflakes
+    "W", #pycode style warning rules
+    "B", # bugbear
+    "I", # isort 
+]
+lint.ignore=[
+    "C901", # max complexity to 10
+    "E501", ## Leave it to the formatter to split long lines
+    ]
+
+[tool.ruff.format]
+indent-style="space"
+quote-style="single"
