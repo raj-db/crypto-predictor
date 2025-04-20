@@ -13,4 +13,4 @@ class Settings(BaseSettings):
 
 config = Settings()
 
-print(config.model_dump())
+# print(config.model_dump())
