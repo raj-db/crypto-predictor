@@ -77,7 +77,7 @@ spec:
           - name: KAFKA_CLUSTERS_0_NAME
             value: kafka-e11b
 
-          image: provectuslabs/kafka-ui:latest
+          image: provectuslabs/kafka-ui:v0.6.1
 
           livenessProbe:
             failureThreshold: 3

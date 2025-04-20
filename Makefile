@@ -1,16 +1,16 @@
 dev:
-	uv run services/trades/src/trades/main.py
+	uv run services/${service}/src/${service}/main.py
 	
 
 build:
-	docker build -t trades:dev -f Docker/trades.dockerfile .
+	docker build -t ${service}:dev -f Docker/${service}.dockerfile .
 
 push:
-	kind load docker-image trades:dev --name rwml-34fa
+	kind load docker-image ${service}:dev --name rwml-34fa
 
 deploy: build push
-	kubectl delete -f deployments/dev/trades/trades.yaml
-	kubectl apply -f deployments/dev/trades/trades.yaml
+	kubectl delete -f deployments/dev/${service}/${service}.yaml --ignore-not-found=true
+	kubectl apply -f deployments/dev/${service}/${service}.yaml
 
 lint:
 	ruff check . --fix
