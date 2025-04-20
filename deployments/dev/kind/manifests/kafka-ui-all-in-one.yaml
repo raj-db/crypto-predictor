@@ -84,9 +84,9 @@ spec:
             httpGet:
               path: /
               port: 8080
-            initialDelaySeconds: 0
+            initialDelaySeconds: 10
             periodSeconds: 10
-            timeoutSeconds: 1
+            timeoutSeconds: 5
 
           name: kafka-ui
 
@@ -95,9 +95,9 @@ spec:
             httpGet:
               path: /
               port: 8080
-            initialDelaySeconds: 0
+            initialDelaySeconds: 10
             periodSeconds: 10
-            timeoutSeconds: 1
+            timeoutSeconds: 5
 
           resources:
             limits:
