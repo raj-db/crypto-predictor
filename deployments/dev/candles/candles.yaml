@@ -5,7 +5,7 @@ metadata:
   labels:
     app: candles
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: candles
@@ -25,7 +25,7 @@ spec:
           value: "trades"
         - name: KAFKA_OUTPUT_TOPIC
           value: "candles"
-        - name: KAFKA_CONSUMER_GROUP
-          value: "candles_consumer_group"
         - name: CANDLE_SECONDS
           value: "60"
+        - name: EMIT_INTERMEDIATE_CANDLES
+          value: "true"
