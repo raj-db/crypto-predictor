@@ -18,7 +18,7 @@ networking:
   podSubnet: "10.100.0.0/16"
 nodes:
   - role: control-plane
-    image: kindest/node:v1.31.4
+    image: kindest/node:v1.32.3  #was 31.4
     kubeadmConfigPatches:
     - |
       kind: InitConfiguration
