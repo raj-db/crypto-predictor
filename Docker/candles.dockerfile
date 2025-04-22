@@ -1,5 +1,7 @@
 # Use a Python image with uv pre-installed
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+#FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+FROM ghcr.io/astral-sh/uv:0.6.14-python3.12-bookworm
+
 
 # Install the project into `/app`
 WORKDIR /app
@@ -12,6 +14,7 @@ ENV UV_LINK_MODE=copy
 
 #copy services to app
 COPY services /app/services
+
 
 # Install the project's dependencies using the lockfile and settings
 RUN --mount=type=cache,target=/root/.cache/uv \
@@ -26,17 +29,29 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
 # Place executables in the environment at the front of the path
-ENV PATH="/app/.venv/bin:$PATH"
+ENV PYTHONPATH=/app/services/candles/src:$PYTHONPATH
+ENV VIRTUAL_ENV=/app/.venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+
+
+
+
 
 # Reset the entrypoint, don't invoke `uv`
 ENTRYPOINT []
+
+#ENTRYPOINT ["bash", "-c"]
+
 
 # Run the FastAPI application by default
 # Uses `fastapi dev` to enable hot-reloading when the `watch` sync occurs
 # Uses `--host 0.0.0.0` to allow access from outside the container
 # CMD ["fastapi", "dev", "--host", "0.0.0.0", "src/uv_docker_example"]
-
+# application's state store (used for checkpointing or aggregations like windowed operations) has a corrupted or missing changelog offset.
+#CMD ["uv", "run", "services/candles/src/candles/main.py", "--reset"]
+#CMD ["rm -rf /app/.quix_state && uv run services/candles/src/candles/main.py"]
 CMD ["uv", "run", "services/candles/src/candles/main.py"]
-
+#CMD ["uv", "run", "-m", "candles.main"]
 # debugging
 #CMD ["/bin/bash" , "-c" , "sleep infinity"]
