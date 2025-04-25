@@ -1,6 +1,9 @@
 # Use a Python image with uv pre-installed
 #FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 FROM ghcr.io/astral-sh/uv:0.6.14-python3.12-bookworm
+#FROM ghcr.io/astral-sh/uv:0.6.16-python3.12-bookworm
+
+
 
 
 # Install the project into `/app`
@@ -29,9 +32,12 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
 # Place executables in the environment at the front of the path
-ENV PYTHONPATH=/app/services/candles/src:$PYTHONPATH
-ENV VIRTUAL_ENV=/app/.venv
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+#ENV PYTHONPATH=/app/services/candles/src:$PYTHONPATH
+#ENV VIRTUAL_ENV=/app/.venv
+#ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+ENV PATH="/app/.venv/bin:$PATH"
+
 
 
 
