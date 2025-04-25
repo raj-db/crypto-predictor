@@ -32,6 +32,7 @@ def run(
     kafka_broker_address: str,
     kafka_input_topic: str,
     kafka_output_topic: str,
+    kafka_consumer_group: str,
     # Candle parameters
     candle_seconds: int,
     emit_intermediate_candles: bool,
@@ -56,6 +57,7 @@ def run(
     # create an application
     app = Application(
         broker_address=kafka_broker_address,
+        consumer_group=kafka_consumer_group,
     )
 
     # Define the Kafka topics
@@ -127,5 +129,6 @@ if __name__ == '__main__':
         kafka_input_topic=config.kafka_input_topic,
         kafka_output_topic=config.kafka_output_topic,
         candle_seconds=config.candle_seconds,
+        kafka_consumer_group=config.kafka_consumer_group,
         emit_intermediate_candles=config.emit_intermediate_candles,
     )
