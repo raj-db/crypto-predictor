@@ -26,7 +26,9 @@ lint:
 build-and-push-for-prod:
 	docker buildx build --platform linux/amd64 -t ghcr.io/${service}:prod -f Docker/${service}.dockerfile . --push
 
-
+deploy-for-prod:
+	kubectl delete -f deployments/prod/${service}/${service}.yaml --ignore-not-found=true
+	kubectl apply -f deployments/prod/${service}/${service}.yaml
 
 
 
